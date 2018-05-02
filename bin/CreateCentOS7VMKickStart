@@ -72,3 +72,8 @@ echo `date`" Kickstart file: $output"
 date=`date`
 sed s/%IPADDR%/$ipaddr/g  $template | sed s/%HOSTNAME%/$hostname/g | sed s/%NETMASK%/$netmask/g | sed s/%GATEWAY%/$gateway/g | sed s/%DATE%/"$date"/g > $output
 
+$SCRIPTPATH/InsertRootPasswd $output
+
+exit
+
+
