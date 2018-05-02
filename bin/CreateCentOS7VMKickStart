@@ -15,15 +15,15 @@
 # Get the pathname to this script
 #
 SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
-echo $SCRIPTPATH
+SCRIPTROOT="$SCRIPTPATH/.."
 
 #
 # Parse the command line
 #
 hostname=$1
-output="$SCRIPTPATH/config/$hostname-ks.cfg"
+output="$SCRIPTROOT/kickstarts/$hostname-ks.cfg"
 hostsFile="/etc/hosts"
-template='$SCRIPTPATH/templates/centos7-vm-template.cfg'
+template="$SCRIPTROOT/templates/centos7-vm-template.cfg"
 
 #
 # Check for this host in /etc/hosts and get its IP address
@@ -35,7 +35,7 @@ if [ $testGrep != 1 ]; then
    exit -1
 fi
 
-mkdir -p $SCRIPTPATH/config
+mkdir -p $SCRIPTROOT/kickstarts
 
 ipaddr=`egrep '^1' $hostsFile | grep -i $hostname.najah.edu | awk '{print $1}'`
 case "$ipaddr" in
